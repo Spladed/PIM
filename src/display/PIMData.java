@@ -1,13 +1,13 @@
-package PIM;
+package display;
 
 import java.io.*;
 import java.util.*;
 import Tools.*;
+import PIM.*;
 
 //存储数据
 public class PIMData implements Serializable{
 	private static final long serialVersionUID=1L;
-//	private List<List<PIMEntity>> list=new LinkedList<>();
 	private PIMCollection pc;
 	public PIMData() {
 		pc=new PIMCollection();

@@ -1,4 +1,4 @@
-package PIM;
+package display;
 
 import java.util.Scanner;
 

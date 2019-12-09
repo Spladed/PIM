@@ -9,6 +9,7 @@ import java.util.*;
  *@author:1310140596@qq.com
  */
 
+//PIM的容器类
 public class PIMCollection implements Collection<PIMEntity>,Serializable{
 	private static final long serialVersionUID=1L;
 	private class Node<E> implements Serializable{
