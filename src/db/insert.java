@@ -3,13 +3,13 @@ package db;
 import java.sql.*;
 
 public class insert {
-	public static void insertSet(String user,String pass,String table,String[] column,String[] content) {
+	public static void insertSet(String table,String[] column,String[] content) {
 		Connection conn=null;	
 		Statement stmt=null;
 		
 		try {
 			Class.forName(DBINFO.JDBC_DRIVER);
-			conn=DriverManager.getConnection(DBINFO.DB_URL,user,pass);
+			conn=DriverManager.getConnection(DBINFO.DB_URL,"root","niunian052170");
 			stmt=conn.createStatement();
 			String sql="insert into "+table+" "+SQLString.insertColumn(column)+" values "+SQLString.insertValues(content);
 			stmt.execute(sql);

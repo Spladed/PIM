@@ -2,7 +2,6 @@ package display;
 
 import java.util.Scanner;
 
-import Tools.Display;
 import Tools.InputJudgment;
 
 /*

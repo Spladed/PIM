@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import Tools.*;
 import PIM.*;
+import db.*;
 
 //存储数据
 public class PIMData implements Serializable{
@@ -37,18 +38,45 @@ public class PIMData implements Serializable{
 		}
 	}
 	//用于保存数据
-	public void Save() throws Exception {	
-			ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(".\\data"));
-			oos.writeObject(this);
-			oos.close();
-			System.out.println("Saved!");
+	public void Save(){	
+		for(PIMEntity pe:pc) {
+			if((pe.getClass().getName()).equals("PIM.PIMTodo")) {
+				String[] column= {"content","priority","todo_time"};
+				String[] content= {pe.toString(),pe.getPriority(),pe.getDate()};
+				insert.insertSet("todo", column, content);
+			}
+			if((pe.getClass().getName()).equals("PIM.PIMNote")) {
+				String[] column= {"content","priority"};
+				String[] content= {pe.toString(),pe.getPriority()};
+				insert.insertSet("note", column, content);
+			}
+			if((pe.getClass().getName()).equals("PIM.PIMAppointment")) {
+				String[] column= {"content","priority","appointment_time"};
+				String[] content= {pe.toString(),pe.getPriority(),pe.getDate()};
+				insert.insertSet("appointment", column, content);
+			}
+			if((pe.getClass().getName()).equals("PIM.PIMContact")) {
+				String[] column= {"content","priority","todo_time"};
+				String[] content= {pe.toString(),pe.getPriority(),pe.getDate()};
+				insert.insertSet("todo", column, content);
+			}
+		}
+		System.out.println("Done!");
 	}
 	//用于加载数据
-	public PIMData Load() throws Exception {
-		File file=new File(".\\data");
-		ObjectInputStream ois=new ObjectInputStream(new FileInputStream(file));
-		System.out.println("Loaded!");
-		return (PIMData)ois.readObject();
+	public PIMData Load() {
+		//加载todo
+		String[] content= {"content","priority","todo_time"};
+		List<HashMap<String,Object>> recieve=select.selectSet( "todo", content);
+		if(!recieve.isEmpty()) {
+			for(HashMap<String,Object> m:recieve) {
+				
+			}
+		}
+		//加载note
+		//加载appointment
+		//加载contact
+		return null;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 	}
 	
 }

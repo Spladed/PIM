@@ -1,10 +1,11 @@
-package Tools;
+package display;
 
 import java.util.List;
 
 import PIM.PIMCollection;
 import PIM.PIMEntity;
 
+//为主界面提供显示的文本内容
 public class Display {
 	public static void Welcome() {
 		System.out.println("------------------");
