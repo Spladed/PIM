@@ -12,7 +12,7 @@ public class PIMTodo extends PIMEntity implements PIMDate{
 		this.date=date;
 	}
 	
-	public PIMTodo(String priority,String content,String date) {
+	public PIMTodo(String content,String priority,String date) {
 		// TODO Auto-generated constructor stub
 		super(priority);
 		this.content=content;
@@ -29,7 +29,7 @@ public class PIMTodo extends PIMEntity implements PIMDate{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return date+" "+content;
+		return content;
 	}
 	
 	@Override

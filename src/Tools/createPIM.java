@@ -19,13 +19,14 @@ public class createPIM {
 		priority=sc.nextLine();
 		if(priority.equals("Y") || priority.equals("y")) {
 			System.out.println("Enter todo priority: normal/important/urgent");
-			priority=sc.nextLine();			
+			priority=sc.nextLine();	
+			System.out.println("Done");
+			return new PIMTodo(content, priority, date);
 		}
 		else {
-			priority="normal";
+			System.out.println("Done");
+			return new PIMTodo(content, date);
 		}
-		System.out.println("Done");
-		return new PIMTodo(priority, content, date);
 	}
 	
 	public static PIMEntity Note(){
@@ -38,13 +39,14 @@ public class createPIM {
 		priority=sc.nextLine();
 		if(priority.equals("Y") || priority.equals("y")) {
 			System.out.println("Enter note priority:normal/important/urgent");
-			priority=sc.nextLine();		
+			priority=sc.nextLine();
+			System.out.println("Done");
+			return new PIMNote(content, priority);
 		}
 		else {
-			priority="normal";
+			System.out.println("Done");
+			return new PIMNote(content);
 		}
-		System.out.println("Done");
-		return new PIMNote(priority, content);
 	}
 	
 	public static PIMEntity Appointment(){
@@ -61,12 +63,13 @@ public class createPIM {
 		if(priority.equals("Y") || priority.equals("y")) {
 			System.out.println("Enter appointment priority:normal/important/urgent");
 			priority=sc.nextLine();
+			System.out.println("Done");
+			return new PIMAppointment(description,priority, date);
 		}
 		else {
-			priority="normal";
+			System.out.println("Done");
+			return new PIMAppointment(description,date);
 		}
-		System.out.println("Done");
-		return new PIMAppointment(priority,description, date);
 	}
 	
 	public static PIMEntity Contact(){
@@ -86,11 +89,12 @@ public class createPIM {
 		if(priority.equals("Y") || priority.equals("y")) {
 			System.out.println("Enter contact priority:normal/important/urgent");
 			priority=sc.nextLine();
+			System.out.println("Done");
+			return new PIMContact(firstName, lastName, email, priority);
 		}
 		else {
-			priority="normal";
+			System.out.println("Done");
+			return new PIMContact(firstName, lastName, email);
 		}
-		System.out.println("Done");
-		return new PIMContact(priority, firstName, lastName, email);
 	}
 }

@@ -15,7 +15,7 @@ public class PIMContact extends PIMEntity{
 		email=e;
 	}
 	
-	public PIMContact(String priority,String fn,String ln,String e){
+	public PIMContact(String fn,String ln,String e,String priority){
 		super(priority);
 		firstName=fn;
 		lastName=ln;
@@ -35,6 +35,14 @@ public class PIMContact extends PIMEntity{
 	public String toString() {
 		// TODO Auto-generated method stub
 		return firstName+" "+lastName+" "+email;
+	}
+	
+	public static void main(String[] args) {
+		PIMContact pc=new PIMContact("1", "2", "3");
+		System.out.println(pc.toString());
+		String[] str=pc.toString().split(" ");
+		for(String s:str)
+			System.out.println(s);
 	}
 
 }

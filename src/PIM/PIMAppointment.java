@@ -13,7 +13,7 @@ public class PIMAppointment extends PIMEntity implements PIMDate{
 		this.date=date;
 	}
 	
-	public PIMAppointment(String priority,String description,String date) {
+	public PIMAppointment(String description,String priority,String date) {
 		// TODO Auto-generated constructor stub
 		super(priority);
 		this.description=description;

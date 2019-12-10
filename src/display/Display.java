@@ -26,15 +26,15 @@ public class Display {
 		System.out.println("-----5.Quit----");
 		
 	}	
-	public static void showList(List<PIMEntity> list) {
-		if(!list.isEmpty()) {
-			System.out.println("There are "+list.size()+" items.");
-			for(PIMEntity temp:list)
-				System.out.println(temp.toString());
-		}
-		else
-			System.out.println("There are 0 items.");
-	}
+//	public static void showList(List<PIMEntity> list) {
+//		if(!list.isEmpty()) {
+//			System.out.println("There are "+list.size()+" items.");
+//			for(PIMEntity temp:list)
+//				System.out.println(temp.toString());
+//		}
+//		else
+//			System.out.println("There are 0 items.");
+//	}
 	
 	public static void showList(PIMCollection pc) {
 		if(pc==null)

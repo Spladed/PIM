@@ -10,7 +10,7 @@ public class PIMNote extends PIMEntity{
 		this.content=content;
 	}
 	
-	public PIMNote(String priority,String content) {
+	public PIMNote(String content,String priority) {
 		// TODO Auto-generated constructor stub
 		super(priority);
 		this.content=content;

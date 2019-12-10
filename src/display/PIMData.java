@@ -1,17 +1,18 @@
 package display;
 
-import java.io.*;
 import java.util.*;
 import Tools.*;
 import PIM.*;
 import db.*;
 
-//存储数据
-public class PIMData implements Serializable{
-	private static final long serialVersionUID=1L;
+//处理主界面的各个功能
+public class PIMData{
 	private PIMCollection pc;
 	public PIMData() {
 		pc=new PIMCollection();
+	}
+	public PIMData(PIMCollection pc) {
+		this.pc=pc;
 	}
 	//用于将各个事项列出
 	public void List() {
@@ -52,13 +53,14 @@ public class PIMData implements Serializable{
 			}
 			if((pe.getClass().getName()).equals("PIM.PIMAppointment")) {
 				String[] column= {"content","priority","appointment_time"};
-				String[] content= {pe.toString(),pe.getPriority(),pe.getDate()};
+				String[] content= {pe.toString().split(" ")[1],pe.getPriority(),pe.getDate()};
 				insert.insertSet("appointment", column, content);
 			}
-			if((pe.getClass().getName()).equals("PIM.PIMContact")) {
-				String[] column= {"content","priority","todo_time"};
-				String[] content= {pe.toString(),pe.getPriority(),pe.getDate()};
-				insert.insertSet("todo", column, content);
+			if((pe.getClass().getName()).equals("PIM.PIMContact")) {				
+				String[] result=(pe.toString()).split(" ");
+				String[] column= {"firstname","lastname","email","priority"};
+				String[] content= {result[0],result[1],result[2],pe.getPriority()};
+				insert.insertSet("contact", column, content);
 			}
 		}
 		System.out.println("Done!");
@@ -66,17 +68,39 @@ public class PIMData implements Serializable{
 	//用于加载数据
 	public PIMData Load() {
 		//加载todo
-		String[] content= {"content","priority","todo_time"};
-		List<HashMap<String,Object>> recieve=select.selectSet( "todo", content);
+		PIMCollection newPC=new PIMCollection();
+		String[] todoContent= {"content","priority","todo_time"};
+		List<HashMap<String,Object>> recieve=select.selectSet( "todo", todoContent);
 		if(!recieve.isEmpty()) {
 			for(HashMap<String,Object> m:recieve) {
-				
+				newPC.add(new PIMTodo((String)m.get(todoContent[0]), (String)m.get(todoContent[1]), String.valueOf(m.get(todoContent[2]))));
 			}
 		}
 		//加载note
+		String[] noteContent= {"content","priority"};
+		recieve=select.selectSet( "note", noteContent);
+		if(!recieve.isEmpty()) {
+			for(HashMap<String,Object> m:recieve) {
+				newPC.add(new PIMNote((String)m.get(noteContent[0]), (String)m.get(noteContent[1])));
+			}
+		}
 		//加载appointment
+		String[] appointmentContent= {"content","priority","appointment_time"};
+		recieve=select.selectSet( "appointment", appointmentContent);
+		if(!recieve.isEmpty()) {
+			for(HashMap<String,Object> m:recieve) {
+				newPC.add(new PIMAppointment((String)m.get(appointmentContent[0]), (String)m.get(appointmentContent[1]), String.valueOf(m.get(appointmentContent[2]))));
+			}
+		}
 		//加载contact
-		return null;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+		String[] contactContent= {"firstname","lastname","email","priority"};
+		recieve=select.selectSet( "contact", contactContent);
+		if(!recieve.isEmpty()) {
+			for(HashMap<String,Object> m:recieve) {
+				newPC.add(new PIMContact((String)m.get(contactContent[0]), (String)m.get(contactContent[1]), (String)m.get(contactContent[2]),(String)m.get(contactContent[3])));
+			}
+		}
+		return new PIMData(newPC);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 	}
 	
 }
